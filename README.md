@@ -1,42 +1,42 @@
-# Technical SEO Auditor — React + Vercel
+# Technical SEO + GEO/LLM Auditor
 
-React/Vite frontend met een Vercel serverless API crawler voor technische SEO-audits.
+React + Vercel serverless app voor het crawlen van een website en het vinden van technische SEO, link-health en GEO/LLM issues.
 
-## Verbeteringen in deze versie
+## Checks
 
-- Severity model: critical, high, medium, low
-- SEO score per pagina en gemiddelde site-score
-- Issues-tab met prioriteitenlijst
-- CSV-export voor pages, issues en links
-- Interne én externe link health checks
-- Redirect chain detectie
-- Duplicate title, meta description en H1-detectie
-- Structured data detectie + invalid JSON-LD check
-- Open Graph title/description check
-- Mixed content check
-- Accessibility checks: missing alt en links zonder toegankelijke tekst
-- Internal linking metrics: internal links, external links en inlinks
-- Betere filtering op severity en zoekterm
+- HTTP status, redirects en redirect chains
+- Broken interne/externe links
+- Title, meta description, H1, canonical, robots meta
+- Structured data / JSON-LD validatie
+- Open Graph, viewport, lang, mixed content, image alt, empty links
+- Duplicate titles, meta descriptions en H1's
+- Internal link metrics en inlinks
+- GEO/LLM checks:
+  - `/llms.txt` aanwezigheid en basisstructuur
+  - `robots.txt` + AI crawler regels voor o.a. GPTBot, ChatGPT-User, OAI-SearchBot, Google-Extended, ClaudeBot en PerplexityBot
+  - Entity schema zoals Organization, LocalBusiness, Product, Service, FAQPage en Article
+  - Answerability score per pagina
+  - Author/expert/team signalen
+  - Publicatie/update datum signalen
+  - FAQ, heading, lijst/tabel en citation/evidence signalen
 
-## Lokaal draaien
+## Lokaal runnen
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open daarna de URL die `vercel dev` toont, meestal `http://localhost:3000`.
+Open daarna de URL die Vercel CLI toont.
 
 ## Deploy naar Vercel
 
-1. Upload deze map naar GitHub.
-2. Importeer het project in Vercel.
+1. Push deze map naar GitHub.
+2. Importeer de repo in Vercel.
 3. Framework preset: Vite.
 4. Build command: `npm run build`.
 5. Output directory: `dist`.
 
-De API route staat in `api/audit.js` en wordt door Vercel als serverless function gedeployed.
+## Let op
 
-## Praktische limieten
-
-Vercel serverless functies hebben runtime-limieten. Voor kleine en middelgrote sites werkt dit goed. Voor grote sites kun je beter crawlen per subfolder, `maxPages` lager zetten of de API als langere Node service draaien.
+Vercel serverless functies hebben runtime-limieten. Voor grote sites kun je beter met lagere `maxPages`, lagere concurrency of per subfolder crawlen.
