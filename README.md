@@ -1,46 +1,42 @@
-# Technical SEO Link Auditor — Vercel React App
+# Technical SEO Auditor — React + Vercel
 
-React/Vite frontend met een Vercel Serverless Function voor crawling en technische SEO-checks.
+React/Vite frontend met een Vercel serverless API crawler voor technische SEO-audits.
 
-## Deploy naar Vercel
+## Verbeteringen in deze versie
 
-1. Upload deze map naar GitHub, GitLab of Bitbucket.
-2. Maak in Vercel een nieuw project aan en importeer de repository.
-3. Vercel detecteert Vite automatisch.
-4. Gebruik deze settings:
-   - Build command: `npm run build`
-   - Output directory: `dist`
-   - Install command: `npm install`
-5. Deploy.
+- Severity model: critical, high, medium, low
+- SEO score per pagina en gemiddelde site-score
+- Issues-tab met prioriteitenlijst
+- CSV-export voor pages, issues en links
+- Interne én externe link health checks
+- Redirect chain detectie
+- Duplicate title, meta description en H1-detectie
+- Structured data detectie + invalid JSON-LD check
+- Open Graph title/description check
+- Mixed content check
+- Accessibility checks: missing alt en links zonder toegankelijke tekst
+- Internal linking metrics: internal links, external links en inlinks
+- Betere filtering op severity en zoekterm
 
-De API-route staat op `/api/audit`.
-
-## Lokaal draaien met Vercel CLI
+## Lokaal draaien
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open daarna de URL die Vercel CLI toont, meestal `http://localhost:3000`.
+Open daarna de URL die `vercel dev` toont, meestal `http://localhost:3000`.
 
-## Wat wordt gecontroleerd?
+## Deploy naar Vercel
 
-- Interne en externe links
-- HTTP-statussen, redirects en errors
-- Response time
-- Title length en ontbrekende titles
-- Meta descriptions
-- H1-count
-- Canonical tags
-- Noindex meta robots
-- HTML lang en viewport
-- Thin content-indicatie
-- Afbeeldingen zonder alt
-- JSON-LD structured data
-- HTTPS
-- CSV-export voor pages en links
+1. Upload deze map naar GitHub.
+2. Importeer het project in Vercel.
+3. Framework preset: Vite.
+4. Build command: `npm run build`.
+5. Output directory: `dist`.
 
-## Belangrijke Vercel-limiet
+De API route staat in `api/audit.js` en wordt door Vercel als serverless function gedeployed.
 
-Serverless functions hebben een maximale runtime. Houd `Max pagina's`, `Max diepte`, timeout en externe link-checks beperkt voor grote websites. Voor zeer grote crawls is een queue/worker of aparte server beter.
+## Praktische limieten
+
+Vercel serverless functies hebben runtime-limieten. Voor kleine en middelgrote sites werkt dit goed. Voor grote sites kun je beter crawlen per subfolder, `maxPages` lager zetten of de API als langere Node service draaien.
